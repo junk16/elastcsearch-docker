@@ -53,4 +53,11 @@ RUN curl -s https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar
 RUN curl -s https://download.elastic.co/kibana/kibana/kibana-4.3.0-linux-x64.tar.gz | tar -xz -C /usr/local/
 
 # curator
-RUN pip install elasticsearch-curator 
+RUN pip install elasticsearch-curator
+
+
+# elasticsearch port
+EXPOSE 9200
+
+# kibana port
+EXPOSE 5601
