@@ -55,6 +55,8 @@ RUN curl -s https://download.elastic.co/kibana/kibana/kibana-4.3.0-linux-x64.tar
 # curator
 RUN pip install elasticsearch-curator
 
+# timezone
+RUN /bin/cp -f /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # elasticsearch port
 EXPOSE 9200
