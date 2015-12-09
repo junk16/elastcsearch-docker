@@ -20,6 +20,7 @@ USER root
 # install dev tools
 RUN yum install -y curl which tar sudo openssh-server openssh-clients rsync | true
 RUN yum update -y libselinux | true
+RUN yum install -y logrotate
 
 # passwordless ssh
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
@@ -57,6 +58,13 @@ RUN pip install elasticsearch-curator
 
 # timezone
 RUN /bin/cp -f /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+# bootstrap
+ADD bootstrap.sh /etc/bootstrap.sh
+RUN chown root:root /etc/bootstrap.sh
+RUN chmod 700 /etc/bootstrap.sh
+
+CMD ["/etc/bootstrap.sh", "-d"]
 
 # elasticsearch port
 EXPOSE 9200
